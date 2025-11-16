@@ -1,3 +1,5 @@
+// src/components/EarthGridLines.jsx
+
 import React, { useRef, useMemo, useEffect } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
@@ -86,7 +88,7 @@ export default function EarthGridLines() {
 	}, [])
 
 	return (
-		<group ref={groupRef} scale={[2.01, 2.01, 2.01]}> // Group containing the grid lines and labels
+		<group ref={groupRef} scale={[1.01, 1.01, 1.01]}> // Group containing the grid lines and labels
 
 
 			{latitudeLines.map((geometry, idx) => { // constants used to writting the latitude lines

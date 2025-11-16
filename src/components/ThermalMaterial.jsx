@@ -1,3 +1,5 @@
+// src/components/ThermalMaterial.jsx
+
 import * as THREE from 'three'
 
 export function getThermalMaterial(sunPosition, meshWorldPosition) {

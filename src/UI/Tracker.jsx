@@ -14,13 +14,19 @@ import IconImaginaryLines from "../assets/IconImaginaryLines.jsx";
 import IconRadar from "../assets/IconRadar.jsx";
 import IconShare from "../assets/IconShare.jsx";
 import IconExitFullScreen from "../assets/IconExitFullScreen.jsx";
+import AboutMe from './AboutMe.jsx';
+
 import IconIss from "../assets/IconIss.jsx";
 import './PassPredictionPanel.css'
+import './ExpandableInfoButton.css'
+import './FancyButton.css'
+import IconArrowUp from '../assets/IconArrowUp.jsx'
+import ExpandableSearchBar from './ExpandableSearchBar.jsx'
 
 export default function Tracker() {
 	const { setFocusTarget } = useSceneControls();
 	const { zoomIn, zoomOut } = useSceneControls();
-	const { toggleGridLines } = useSceneControls();
+	const { toggleGridLines } = useSceneControls(); 
 	const { recenterCamera } = useSceneControls();
 	const { setThermalView } = useSceneControls();
 	const { centerPanelCity, closeCenterPanel } = useSceneControls();
@@ -29,9 +35,18 @@ export default function Tracker() {
 	const [weatherDataMap, setWeatherDataMap] = useState({});
 	const [isFullscreen, setIsFullscreen] = useState(false);
 	const [showLeftPanel, setShowLeftPanel] = useState(true);
+	const [showAboutMe, setShowAboutMe] = useState(false);
 	const [activePanel, setActivePanel] = useState(null);
-
-
+	const [prevLeftPanelState, setPrevLeftPanelState] = useState(true);
+	const [now, setNow] = useState(new Date());
+	
+	useEffect(() => {
+		const interval = setInterval(() => {
+			setNow(new Date());
+		}, 1000);
+		
+		return () => clearInterval(interval); // cleanup on unmount
+	}, []);
 
 	// Écoute de l'événement pour recevoir les prédictions
 	useEffect(() => {
@@ -39,12 +54,13 @@ export default function Tracker() {
 		window.addEventListener('iss-pass-prediction', handler);
 		return () => window.removeEventListener('iss-pass-prediction', handler);
 	}, []);
-
+	
 	useEffect(() => {
 		if (centerPanelCity) {
-			setShowLeftPanel(false);
+			setPrevLeftPanelState(showLeftPanel); // save current state
+			setShowLeftPanel(false);             // hide panel
 		} else {
-			setShowLeftPanel(true);
+			setShowLeftPanel(prevLeftPanelState); // restore previous state
 		}
 	}, [centerPanelCity]);
 
@@ -63,12 +79,16 @@ export default function Tracker() {
 	// Charger la météo pour chaque passage si nécessaire
 	useEffect(() => {
 		if (!Array.isArray(passPrediction)) return;
-
+		
 		passPrediction.forEach((pass) => {
-			const key = pass.start.getTime();
+			if (!pass?.start || isNaN(new Date(pass.start))) return;
+			
+			const startDate = new Date(pass.start);
+			const key = startDate.getTime();
+			
 			if (weatherDataMap[key]) return;
-
-			fetchWeatherAtTime(pass.lat, pass.lon, pass.start).then((data) => {
+			
+			fetchWeatherAtTime(pass.lat, pass.lon, startDate).then((data) => {
 				setWeatherDataMap(prev => ({
 					...prev,
 					[key]: data
@@ -77,15 +97,38 @@ export default function Tracker() {
 		});
 	}, [passPrediction]);
 
-	return (
-		<div className="absolute inset-0 text-white pointer-events-none">
-			<div className="fixed top-10 left-14 pointer-events-auto">
-				<img src="/src/assets/Logo_1.png" alt="Logo_1" />
-			</div>
 
-			<div className="absolute top-1/2 left-14 pointer-events-auto" style={{ transform: 'translateY(-50%)' }}>
-				<LeftPanel isVisible={showLeftPanel} />
+	return (
+		
+		<div className="absolute inset-0 text-white pointer-events-none">
+			
+			<img className="absolute top-10 left-14 pointer-events-auto" src="/src/assets/Logo_2.png" alt="Logo_2" />
+			
+			<div className="font-f1 absolute top-13.5 right-14 pointer-events-auto">
+				<p>
+					<span className="date-part">
+						{new Intl.DateTimeFormat('en-GB', {
+							timeZone: 'UTC',
+							weekday: 'short',
+							year: 'numeric',
+							month: 'short',
+							day: '2-digit',
+						}).format(now)}
+					</span>{' '}
+						<span className="time-part">
+						{new Intl.DateTimeFormat('en-GB', {
+							timeZone: 'UTC',
+							hour: '2-digit',
+							minute: '2-digit',
+							second: '2-digit',
+							hour12: false,
+						}).format(now)}
+					</span>{' '}
+					UTC
+				</p>
 			</div>
+			
+			<LeftPanel isVisible={showLeftPanel} />
 
 			<div className="pointer-events-auto">
 				{centerPanelCity && (
@@ -141,10 +184,10 @@ export default function Tracker() {
 												<div className="pass-info-block">
 													{weather ? (
 														<>
-															<div className="pass-row"><strong>🌥️ Condition:</strong> {weather.condition}</div>
-															<div className="pass-row"><strong>☁️ Cloud cover:</strong> {weather.clouds}%</div>
-															<div className="pass-row"><strong>👁️ Visibility:</strong> {(weather.visibility / 1000).toFixed(1)} km</div>
-															<div className="pass-row"><strong>🔭 Estimated chance to see the ISS:</strong> <strong>{visibilityProbabilityLabel}</strong></div>
+															<div className="pass-row"><strong>🌥️ Condition: </strong> {weather.condition}</div>
+															<div className="pass-row"><strong>☁️ Cloud cover: </strong> {weather.clouds}%</div>
+															{/*<div className="pass-row"><strong>👁️ Visibility: </strong> {(weather.visibility / 1000).toFixed(1)} km</div>*/}
+															{/*<div className="pass-row"><strong>🔭 Estimated chance to see the ISS: </strong> <strong>{visibilityProbabilityLabel}</strong></div>*/}
 														</>
 													) : (
 														<div className="pass-row">Loading weather data...</div>
@@ -158,7 +201,7 @@ export default function Tracker() {
 								})
 							) : (
 								<div className="pass-section pass-no-prediction">
-									❌ No ISS passes predicted over {passPrediction[0].city} in the next few hours
+									❌ No ISS passes predicted over {passPrediction[0].city} in the next few days
 								</div>
 							)
 						) : (
@@ -184,26 +227,13 @@ export default function Tracker() {
 				)}
 			</div>
 
-			<div className="font-f1 absolute top-10 right-14 pointer-events-auto">
-				<p>{new Intl.DateTimeFormat('en-GB', {
-					timeZone: 'UTC',
-					weekday: 'short',
-					year: 'numeric',
-					month: 'short',
-					day: '2-digit',
-					hour: '2-digit',
-					minute: '2-digit',
-					second: '2-digit',
-					hour12: false
-				}).format(new Date())} UTC</p>
-			</div>
 
-			<div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex gap-4 pointer-events-auto">
+			<div className="focus-buttons">
 				<FancyButton onClick={() => setFocusTarget('earth')}>Focus Earth</FancyButton>
 				<FancyButton onClick={() => setFocusTarget('iss')}>Focus ISS</FancyButton>
 			</div>
 
-			<div className="absolute right-14 top-1/2 -translate-y-1/2 flex flex-col gap-4 w-[10rem] items-end justify-center pointer-events-auto">
+			<div className="right-buttons">
 				<ExpandableIconButton
 					icon={<IconIss style={{ width: '24px', height: '24px' }} />}
 					text="Orbital Data"
@@ -253,6 +283,16 @@ export default function Tracker() {
 					onClick={toggleFullscreen}
 				/>
 			</div>
+			
+			<div className="see-more-button pointer-events-auto">
+				<ExpandableIconButton
+					icon={<IconArrowUp style={{ width: '24px', height: '24px' }} />}
+					text="About Me"
+					onClick={() => setShowAboutMe(true)}
+				/>
+			</div>
+			
+			{showAboutMe && <AboutMe onClose={() => setShowAboutMe(false)} />}
 		</div>
 	);
 }

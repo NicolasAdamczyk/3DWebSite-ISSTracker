@@ -4,5 +4,4 @@ const IconMinus = (props) => (
 	</svg>
 
 );
-
 export default IconMinus;

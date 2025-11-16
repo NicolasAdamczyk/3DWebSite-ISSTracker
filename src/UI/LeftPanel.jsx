@@ -4,6 +4,7 @@ import './LeftPanel.css';
 import { useISSPosition } from '../hooks/useISSPosition';
 import { useISSTleData } from '../hooks/useISSTleData';
 import CurrentCountry from './CurrentCountry';
+import { useAdvancedOrbitalData } from '../hooks/useAdvancedOrbitalData';
 
 export default function LeftPanel({ isVisible }) {
 	const [shouldRender, setShouldRender] = useState(isVisible);
@@ -11,6 +12,7 @@ export default function LeftPanel({ isVisible }) {
 
 	const pos = useISSPosition();
 	const { inclination, orbitPeriodSec, percent, orbitNumberToday } = useISSTleData();
+	const advanced = useAdvancedOrbitalData(pos);
 
 	useEffect(() => {
 		if (isVisible) {
@@ -33,16 +35,14 @@ export default function LeftPanel({ isVisible }) {
 				{pos ? (
 					<>
 						{/* Latitude / Longitude */}
-						<div className="left-panel-section left-panel-latlon-row">
-							<div className="left-panel-latlon-block">
-								<span className="left-panel-section-title">Position</span>
-								<div className="left-panel-row">
-									<span>{pos.lat.toFixed(4)}</span>
-									<span className="left-panel-unit-small">N°</span>
-									<div className="left-panel-unit-separator" />
-									<span>{pos.lon.toFixed(4)}</span>
-									<span className="left-panel-unit-small">E°</span>
-								</div>
+						<div className="left-panel-section">
+							<div className="left-panel-section-title">Position</div>
+							<div className="left-panel-row">
+								<span>{pos.lat.toFixed(4)}</span>
+								<span className="left-panel-unit-small">N°</span>
+								<div className="left-panel-unit-separator" />
+								<span>{pos.lon.toFixed(4)}</span>
+								<span className="left-panel-unit-small">E°</span>
 							</div>
 						</div>
 
@@ -131,6 +131,72 @@ export default function LeftPanel({ isVisible }) {
 				) : (
 					<div className="left-panel-row">
 						<span>Loading ISS Data...</span>
+					</div>
+				)}
+				
+				{/* Keplerian Age */}
+				{advanced && (
+					<div className="left-panel-section">
+						<div className="left-panel-section-title">Keplerian Age</div>
+						<div className="left-panel-row">
+							<span>
+								{advanced.keplerianAge.days}d {advanced.keplerianAge.hours}h{' '}
+								{advanced.keplerianAge.minutes}m {advanced.keplerianAge.seconds}s
+							</span>
+						</div>
+						<div className="left-panel-row">
+							<small>
+								Since TLE epoch ({advanced.keplerianAge.totalSeconds.toFixed(0)} seconds)
+							</small>
+						</div>
+					</div>
+				)}
+				
+				{/* ISS Azimuth */}
+				{advanced?.issAzimuth && (
+					<div className="left-panel-section">
+						<div className="left-panel-section-title">Azimuth (from your location)</div>
+						<div className="left-panel-row">
+							<span>{advanced.issAzimuth.toFixed(1)}°</span>
+						</div>
+					</div>
+				)}
+				
+				{/* Sun data */}
+				{advanced && (
+					<div className="left-panel-section">
+						<div className="left-panel-section-title">Sun (Az/El)</div>
+						<div className="left-panel-row">
+							<span>{advanced.sunAzEl.azimuth.toFixed(1)}° / {advanced.sunAzEl.elevation.toFixed(1)}°</span>
+						</div>
+					</div>
+				)}
+				
+				{/* Moon data */}
+				{advanced && (
+					<div className="left-panel-section">
+						<div className="left-panel-section-title">Moon</div>
+						<div className="left-panel-row">
+							<span>Dec: {advanced.moonDecRA.dec.toFixed(1)}° / RA: {advanced.moonDecRA.ra.toFixed(1)}h</span>
+						</div>
+						<div className="left-panel-row">
+							<span>Az: {advanced.moonAzEl.azimuth.toFixed(1)}° / El: {advanced.moonAzEl.elevation.toFixed(1)}°</span>
+						</div>
+						<div className="left-panel-row">
+							<span>Distance: {advanced.moonDistance.toLocaleString()} km</span>
+						</div>
+					</div>
+				)}
+				
+				{/* Frequencies */}
+				{advanced && (
+					<div className="left-panel-section">
+						<div className="left-panel-section-title">Radio Frequencies</div>
+						<div className="left-panel-row">
+							<span>TX: {advanced.txFrequency / 1e6} MHz</span>
+							<span className="left-panel-unit-separator" />
+							<span>RX: {advanced.rxFrequency / 1e6} MHz</span>
+						</div>
 					</div>
 				)}
 			</div>

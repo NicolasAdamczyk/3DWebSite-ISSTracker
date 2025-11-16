@@ -1,3 +1,4 @@
+/* Style général du panel (contours, forme, bordures..), englobant tout le contenu */
 .center-panel {
     position: absolute;
     top: 50%;
@@ -10,8 +11,8 @@
     padding: 2rem 3rem;
     opacity: 0;
 
-    width: 70%;
-    max-height: 85vh;
+    width: auto;
+    max-height: 70vh;
     box-sizing: border-box;
 
     transition: opacity 0.5s ease;
@@ -23,20 +24,24 @@
     -ms-overflow-style: none; /* IE 10+ */
 }
 
+/* Masquer la scroll-bar */
 .center-panel-content::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera */
 }
 
+/* Lorsque je clique sur un bouton rendant le center panel visible, jouer l'animation d'entrée */
 .center-panel.visible {
     opacity: 1;
     animation: slide-in-from-top 0.4s ease forwards;
 }
 
+/* Lorsque je clique sur un bouton rendant le center panel invisible, jouer l'animation de sortie */
 .center-panel.exiting {
     animation: slide-out-to-top 0.4s ease forwards;
     opacity: 0;
 }
 
+/* Style du contenu du panel en général (couleurs de l'ensemble des textes, ..) */
 .center-panel-content {
     color: white;
     display: flex;
@@ -50,6 +55,7 @@
     opacity: 1;
 }
 
+/* Style de la croix de fermeture */
 .center-panel-close-button {
     position: absolute;
     top: 10px;
@@ -63,10 +69,16 @@
     transition: transform 0.2s ease, color 0.2s ease;
 }
 
+/* Lorqsue ma souris est sur la croix de fermeture */
 .center-panel-close-button:hover {
     transform: scale(1.2);
-    color: #ff6b6b;
 }
+
+
+
+
+
+
 
 /* Réutilisation des animations */
 @keyframes slide-in-from-top {

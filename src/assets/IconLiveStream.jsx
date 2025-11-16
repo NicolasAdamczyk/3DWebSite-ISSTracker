@@ -4,5 +4,4 @@ const IconLiveStream = (props) => (
 	</svg>
 
 );
-
 export default IconLiveStream;

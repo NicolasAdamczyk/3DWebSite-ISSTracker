@@ -1,3 +1,5 @@
+// src/components/Sun.jsx
+
 import React, { forwardRef, useImperativeHandle, useRef } from 'react'
 import { useLoader } from '@react-three/fiber'
 import * as THREE from 'three'

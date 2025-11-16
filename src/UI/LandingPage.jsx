@@ -56,7 +56,7 @@ export default function LandingPage({ onStart, isVisible }) {
 
 					{/* Logo en haut à gauche */}
 					<div className="fixed top-10 left-14">
-						<img src="/src/assets/Logo_1.png" alt="Logo_1" />
+						<img src="/src/assets/Logo_2.png" alt="Logo_2" />
 					</div>
 
 					{/* Contenu centré */}

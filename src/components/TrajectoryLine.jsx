@@ -1,3 +1,5 @@
+// src/components/TrajectoryLine.jsx
+
 import React, { useMemo, useRef, useEffect, useState } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as satellite from 'satellite.js'
@@ -173,7 +175,7 @@ export function TrajectoryLine({
 		<primitive
 			object={new Line(geomRef.current, material)}
 			ref={lineRef}
-			scale={[2.125, 2.125, 2.125]}
+			scale={[1.125, 1.125, 1.125]}
 		/>
 	)
 }

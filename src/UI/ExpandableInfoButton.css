@@ -1,15 +1,48 @@
+.right-buttons {
+    position: absolute;
+    right: 3.5rem;              /* right-14 = 3.5rem */
+    top: 50%;                   /* top-1/2 */
+    transform: translateY(-50%);/* -translate-y-1/2 */
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;                  /* gap-4 = 1rem */
+
+    align-items: flex-end;     /* items-end */
+    justify-content: center;   /* justify-center */
+
+    pointer-events: auto;
+}
+
+.see-more-button{
+    position: absolute;
+    right: 3.5rem;              /* right-14 = 3.5rem */
+    bottom: 2.5rem;
+    transform: translateY(-50%);/* -translate-y-1/2 */
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;                  /* gap-4 = 1rem */
+
+    align-items: flex-end;     /* items-end */
+    justify-content: center;   /* justify-center */
+
+    pointer-events: auto;
+}
+
+
 .expandable-icon-btn {
     position: relative;
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     overflow: hidden;
     border: 2px solid white;
     border-radius: 50px;
     background: transparent;
     color: white;
     cursor: pointer;
-    padding: 0.75rem;
+    padding: 0;
     width: 3rem;
     min-width: 3rem;
     height: 3rem;
@@ -54,18 +87,26 @@
     transition: color 0.3s ease;
 }
 
+/* Label animé depuis la droite */
 .expandable-icon-btn .label {
     white-space: nowrap;
     opacity: 0;
-    margin-left: 0.5rem;
-    transform: translateX(10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    margin-left: 0;
+    max-width: 0;
+    overflow: hidden;
+    transition:
+            opacity 0.3s ease,
+            transform 0.3s ease,
+            margin-left 0.3s ease;
     z-index: 1;
 }
 
+/* Affichage du label au hover */
 .expandable-icon-btn:hover .label {
     opacity: 1;
     transform: translateX(0);
+    margin-left: 0.5rem;
+    max-width: 500px; /* assez large pour tout contenu */
 }
 
 .expandable-icon-btn:hover .icon {
@@ -86,6 +127,98 @@
     animation: expandRect 0.4s ease forwards;
     transform-origin: top left;
 }
+
+/* Desktop / laptop (unchanged) */
+@media (min-width: 1024px) and (max-width: 1818px) {
+    .right-buttons, .see-more-button {
+        right: 3rem;
+    }
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .right-buttons, .see-more-button {
+        right: 2rem;
+    }
+
+    .expandable-icon-btn {
+        width: 2.75rem;
+        min-width: 2.75rem;
+        height: 2.75rem;
+        font-size: 16px;
+    }
+
+    .expandable-icon-btn:hover {
+        padding-left: 0.75rem;
+        padding-right: 1.25rem;
+    }
+
+    .expandable-icon-btn .icon {
+        width: 1.2rem;
+        height: 1.2rem;
+    }
+}
+
+/* Small tablets / large phones */
+@media (min-width: 600px) and (max-width: 767px) {
+    .right-buttons, .see-more-button {
+        right: 1.5rem;
+    }
+
+    .expandable-icon-btn {
+        width: 2.5rem;
+        min-width: 2.5rem;
+        height: 2.5rem;
+        font-size: 15px;
+    }
+
+    .expandable-icon-btn:hover {
+        padding-left: 0.6rem;
+        padding-right: 1rem;
+    }
+
+    .expandable-icon-btn .icon {
+        width: 1.1rem;
+        height: 1.1rem;
+    }
+
+    .expandable-icon-btn .label {
+        font-size: 14px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 599px) {
+    .right-buttons, .see-more-button {
+        right: 0.75rem;
+    }
+
+    .expandable-icon-btn {
+        width: 2.25rem;
+        min-width: 2.25rem;
+        height: 2.25rem;
+        font-size: 14px;
+    }
+
+    .expandable-icon-btn:hover {
+        padding-left: 0.5rem;
+        padding-right: 0.85rem;
+    }
+
+    .expandable-icon-btn .icon {
+        width: 1rem;
+        height: 1rem;
+    }
+
+    .expandable-icon-btn .label {
+        font-size: 13px;
+    }
+}
+
+
+
+
+
 
 /* Keyframes pour scale-up */
 @keyframes expandRect {

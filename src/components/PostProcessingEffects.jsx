@@ -1,3 +1,5 @@
+// src/components/PostProcessingEffects.jsx
+
 import {
     EffectComposer,
     Bloom,

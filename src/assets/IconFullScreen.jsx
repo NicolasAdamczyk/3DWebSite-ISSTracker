@@ -13,5 +13,4 @@ const IconFullScreen = (props) => (
 		/>
 	</svg>
 );
-
 export default IconFullScreen;

@@ -5,5 +5,4 @@ const IconPlus = (props) => (
 
 
 );
-
 export default IconPlus;

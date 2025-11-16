@@ -1,3 +1,5 @@
+// src/components/NebulaMaterial.jsx
+
 import * as THREE from "three";
 import { useMemo } from "react";
 

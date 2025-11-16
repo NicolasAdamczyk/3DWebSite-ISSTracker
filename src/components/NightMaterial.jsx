@@ -1,4 +1,5 @@
 // src/materials/NightMaterial.jsx
+
 import * as THREE from 'three'
 
 export function createNightMaterial(colorMap, nightMap, sunDirection) {

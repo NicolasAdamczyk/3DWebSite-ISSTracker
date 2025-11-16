@@ -1,4 +1,5 @@
 // src/components/RoundedRect.js
+
 import * as THREE from 'three';
 
 export function createRoundedRectGeometry(width, height, radius, smoothness = 8) {

@@ -9,7 +9,7 @@ export function useISS3DPosition(issPos, earthRadius = 1) {
   const cartesian = latLonAltToCartesian(
     issPos.lat,
     issPos.lon,
-    earthRadius + (issPos.alt / 6371) * earthRadius + 1.2
+    earthRadius + (issPos.alt / 6371) * earthRadius + 0.125
   )
 
   const rotationY = getEarthRotationY()

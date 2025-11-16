@@ -1,13 +1,12 @@
+// src/components/Earth.jsx
 import { useLoader, useFrame } from '@react-three/fiber'
 import { useRef, useMemo } from 'react'
 import { TextureLoader } from 'three'
 
 import { createNightMaterial } from './NightMaterial'
 import { getFresnelShaderArgs } from './FresnelShaderMaterial'
-import NebulaMaterial from "./NebulaMaterial";
 
 import * as THREE from 'three';
-
 
 export default function Earth({ sunDirection, ...props }) {
     const earthRef = useRef() // Create a reference to the Earth mesh
@@ -20,9 +19,9 @@ export default function Earth({ sunDirection, ...props }) {
         nightMap,
         cloudsMap,
     ] = useLoader(TextureLoader, [
-        '/textures/earth/earthmap10k_edited.png',
-        '/textures/earth/earthnm10k1.png',
-        '/textures/earth/earthlights10k.jpg',
+        '/textures/earth/earthmap2k.jpg',
+        '/textures/earth/earthnm2k.png',
+        '/textures/earth/earthlights2k.jpg',
         '/textures/earth/earthhiresclouds4K.png',
     ])
 
@@ -58,7 +57,7 @@ export default function Earth({ sunDirection, ...props }) {
             <mesh ref={cloudsRef} castShadow receiveShadow>
                 <sphereGeometry args={[1.0001, 256, 256]} /> // Clouds geometry with 256 segments
                 <meshStandardMaterial
-                     map={cloudsMap} // Clouds texture
+                    map={cloudsMap} // Clouds texture
                     transparent // Clouds are transparent
                     opacity={0.5}
                     depthWrite={false} // Clouds do not write to the depth buffer

@@ -1,3 +1,4 @@
+// src/components/CameraController.jsx
 import { useEffect, useRef } from 'react'
 import { useThree, useFrame } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
@@ -25,8 +26,8 @@ export default function CameraController ({ focusTarget, issPosition }) {
 	
     // Define the distances limits for different focus targets (earth, ISS), for zooming in/out
 	const DISTANCE_LIMITS = {
-		earth: { min: 3.5, max: 10 },
-		iss: { min: 0.15, max: 0.3 }
+		earth: { min: 1.5, max: 5 },
+		iss: { min: 0.05, max: 0.15 }
 	}
 	
 	// Get the bounding box of an object and its center

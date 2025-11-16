@@ -10,10 +10,6 @@ Vendredi 18/07:
     - Rendre responsive du mieux que possible les panels
     - Réparer le panel du live stream
 
-    - Mise en ligne du site sur GitHub : https://www.youtube.com/watch?v=ziPzOp6j0Oo&ab_channel=%C3%89coleduWeb (V1)
-
-    - Faire la vidéo computer vision
-
     - Mettre a jour les icones
     - Mettre en ordres le contenu des panels (les informations doivent être en anglais)
         - Left Panel
@@ -29,6 +25,23 @@ Vendredi 18/07:
 
 
     - Faire l'écran de chargement sur fond blanc pour une variance de couleurs
+
+
+22/08 : 
+	- Donner a chat gpt toute mon architecture et lui demander quel sera l'architecture dans next js
+	- https://www.youtube.com/watch?v=GgGuf1OtE_o&pp=ygUWY29udmVydCB2aXRlIHRvIG5leHRqcw%3D%3D
+	- https://www.youtube.com/watch?v=qXHC7baN2YQ&t=369s&pp=ygUWY29udmVydCB2aXRlIHRvIG5leHRqcw%3D%3D
+	- Créer un next Js et ajouter tout ce que j'avais dans Vite (sans changer l'architecture pour l'instant)
+
+	- Modulariser tout le code et ajouter la JSdoc (sur les grands composants)
+	- Modifier et afficher la vraie taille et distance de l'iss par rapport au sol
+    - Implémenter la recherche des villes pour les predictions de passage
+        - Voir exactement comment marche SimpleMaps (gratuit pour les 42 000 villes principales)
+        - Voir exactement comment marche GeoNames (Open source)
+        - La recherche doit etre fluide alors comment faire exactement
+        - C'est quoi un serveur Next.js ?
+    - Essayer d'implémenter l'effet de reduction de FOV lorsque je fais un zoom sur la terre (pour avoir l'effet de zoom sur la terre comme sur google maps)
+
 
 3D : 
 

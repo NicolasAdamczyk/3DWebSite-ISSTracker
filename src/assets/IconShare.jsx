@@ -4,5 +4,4 @@ const IconShare = (props) => (
 	</svg>
 
 );
-
 export default IconShare;

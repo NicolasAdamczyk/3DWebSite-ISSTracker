@@ -1,0 +1,170 @@
+/* Container principal */
+.search-bar-container {
+    position: relative;
+    display: inline-block;
+    margin: 1rem;
+    font-family: 'Foundry Context Medium', sans-serif;
+}
+
+/* Barre de recherche */
+.search-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 2px solid white;
+    border-radius: 50px;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    padding: 0;
+    width: 3rem;
+    min-width: 3rem;
+    height: 3rem;
+    font-size: 18px;
+    line-height: 25px;
+    transition: width 0.4s ease, padding 0.4s ease, background 0.3s ease, color 0.3s ease;
+    z-index: 10;
+}
+
+.search-bar.expanded {
+    width: 320px;
+    padding: 0 1.2rem;
+    background: rgba(255, 255, 255, 0.95);
+    color: black;
+    cursor: default;
+    justify-content: flex-start;
+}
+
+/* Icône de recherche */
+.search-bar-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    flex-shrink: 0;
+    transition: color 0.3s ease;
+    z-index: 1;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.search-bar.expanded .search-bar-icon {
+    position: static;
+    transform: none;
+    margin-right: 0.5rem;
+    color: black;
+}
+
+/* Formulaire */
+.search-bar-form {
+    flex: 1;
+    display: flex;
+    margin-left: 0;
+}
+
+/* Input */
+.search-bar-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 0.5rem 0;
+    font-size: 1rem;
+    outline: none;
+    color: black;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    width: 100%;
+}
+
+.search-bar.expanded .search-bar-input {
+    opacity: 1;
+}
+
+/* Bouton fermeture */
+.search-bar-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    color: black;
+    flex-shrink: 0;
+    margin-left: 0.5rem;
+    z-index: 1;
+}
+
+/* Résultats sous la barre */
+.search-bar-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    margin-top: 0.5rem;
+    padding: 0.5rem 0;
+    z-index: 20; /* Augmenté pour être au-dessus de tout */
+    max-height: 250px;
+    overflow-y: auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Item individuel */
+.search-bar-result-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    color: black;
+    transition: background 0.2s ease;
+}
+
+.search-bar-result-item:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+/* Drapeau */
+.search-bar-flag {
+    width: 24px;
+    height: auto;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+/* Nom de la ville */
+.search-bar-city-name {
+    flex: 1;
+}
+
+/* Responsive */
+@media (max-width: 1023px) {
+    .search-bar.expanded {
+        width: 280px;
+    }
+}
+
+@media (max-width: 767px) {
+    .search-bar.expanded {
+        width: 240px;
+        padding: 0 1rem;
+    }
+}
+
+@media (max-width: 599px) {
+    .search-bar.expanded {
+        width: 220px;
+        padding: 0 0.9rem;
+    }
+
+    .search-bar-input {
+        font-size: 0.9rem;
+    }
+}

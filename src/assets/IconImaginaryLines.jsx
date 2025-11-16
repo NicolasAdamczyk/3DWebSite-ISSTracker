@@ -4,5 +4,4 @@ const IconImaginaryLines = (props) => (
 	</svg>
 
 );
-
 export default IconImaginaryLines;

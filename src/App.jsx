@@ -21,12 +21,12 @@ export default function App() {
 
     return (
         <>
-            {/*<LandingPage onStart={handleStart} isVisible={showLanding} />*/}
+            <LandingPage onStart={handleStart} isVisible={showLanding} />
 
-            {true && (
+            {appStarted && (
                 <>
                     <SceneControlsProvider>
-                        {/*{isLoading && <LoadingScreen />} /!* Affiche le loader si en chargement *!/*/}
+                        {isLoading && <LoadingScreen />} {/* Affiche le loader si en chargement */}
 
                         <Canvas
                             camera={{ position: [0, 0, 5], fov: 50, near: 0.05, far: 16000 }}

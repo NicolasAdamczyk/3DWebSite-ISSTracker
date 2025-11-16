@@ -1,5 +1,5 @@
 // ExpandableIconButton.jsx
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import './ExpandableInfoButton.css';
 
 export default function ExpandableIconButton({ icon, text }) {

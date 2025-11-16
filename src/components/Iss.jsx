@@ -1,3 +1,5 @@
+// src/components/Iss.jsx
+
 import React, { useRef, useEffect, useMemo } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
@@ -45,7 +47,7 @@ export default function Iss ({ position = [0, 0, 0], focusTarget }) {
 	const attitude = useISSAttitude(new Date())
 	const { thermalView } = useSceneControls()
 	
-	const targetScale = focusTarget === 'iss' ? 0.01 : 0.05
+	const targetScale = focusTarget === 'iss' ? 0.004 : 0.02
 	
 	const outlineScene = useMemo(() => scene.clone(true), [scene])
 	

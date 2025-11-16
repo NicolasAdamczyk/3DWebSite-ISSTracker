@@ -1,4 +1,5 @@
 // src/materials/FresnelShaderMaterial.jsx
+
 import * as THREE from 'three'
 
 export function getFresnelShaderArgs({ rimHex = 0xffffff, facingHex = 0xffffff } = {}) {
