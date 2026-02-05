@@ -40,7 +40,7 @@ function getThermalMaterial (sunPosition, meshWorldPosition) {
 }
 
 export default function Iss ({ position = [0, 0, 0], focusTarget }) {
-	const { scene } = useGLTF('/models/iss.glb')
+	const { scene } = useGLTF('import.meta.env.BASE_URL + models/iss.glb')
 	const ref = useRef()
 	const outlineRef = useRef()
 	const lightRef = useRef()

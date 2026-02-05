@@ -6,7 +6,7 @@ import * as THREE from 'three'
 import { useRef, useMemo } from 'react'
 
 export default function RotatingEnvironmentSphere({
-  hdriURL = '/textures/hdri/hdri_1.hdr',
+  hdriURL = 'import.meta.env.BASE_URL + textures/hdri/hdri_1.hdr',
   speed = 0.001
 }) {
   const meshRef = useRef()

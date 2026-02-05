@@ -27,7 +27,7 @@ function getSprites({
   hue = 0.65,
   numSprites = 8,
   opacity = 0.2,
-  path = "/textures/others/rad-grad.png",
+  path = "import.meta.env.BASE_URL + 'textures/others/rad-grad.png",
   radius = 10,
   sat = 0.5,
   size = 24,
@@ -58,7 +58,7 @@ function NebulaMaterial() {
     z: 0,
     size: 16,
     opacity: 0.009,
-    path: "/textures/others/rad-grad.png",
+    path: "import.meta.env.BASE_URL + 'textures/others/rad-grad.png",
   }), []);
 
   return <primitive object={sprites} />;

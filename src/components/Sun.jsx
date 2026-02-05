@@ -9,7 +9,7 @@ import * as THREE from 'three'
 const Sun = forwardRef(({ position = [0, 0, 0], scale = [100, 100, 100], inclination = 23.5 }, ref) => {
     const groupRef = useRef() // Group ref to hold the sun sprite and directional light at the same position
     const directionalLightRef = useRef() // Directional light ref
-    const sunTexture = useLoader(THREE.TextureLoader, '/textures/lensflare/lensflare7.png') // Load the sun texture
+    const sunTexture = useLoader(THREE.TextureLoader, 'import.meta.env.BASE_URL + textures/lensflare/lensflare7.png') // Load the sun texture
 
     // Update the directional light position whenever the sun position changes
     useImperativeHandle(ref, () => ({
