@@ -58,7 +58,7 @@ function NebulaMaterial() {
     z: 0,
     size: 16,
     opacity: 0.009,
-    path: "import.meta.env.BASE_URL + 'textures/others/rad-grad.png",
+    path: "import.meta.env.BASE_URL + '/textures/others/rad-grad.png",
   }), []);
 
   return <primitive object={sprites} />;

@@ -131,7 +131,7 @@ import { EffectComposer, Bloom } from '@react-three/postprocessing'
 import * as THREE from 'three'
 
 export default function ISS({ position = [0, 0, 0], scale = [1, 1, 1] }) {
-  const { scene } = useGLTF(import.meta.env.BASE_URL + 'models/iss.glb')
+  const { scene } = useGLTF(import.meta.env.BASE_URL + '/models/iss.glb')
   const ref = useRef()
   const { gl, scene: threeScene, camera } = useThree()
 
