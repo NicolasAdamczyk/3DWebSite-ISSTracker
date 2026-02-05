@@ -2,6 +2,8 @@ import { useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { gsap } from 'gsap';
 import FancyButton from "./FancyButton.jsx";
+import logo2 from '../assets/Logo_2.png';
+import screenBg from '../assets/screen.png'; // Ajoute cette ligne
 
 export default function LandingPage({ onStart, isVisible }) {
 	const containerRef = useRef(null);
@@ -50,13 +52,13 @@ export default function LandingPage({ onStart, isVisible }) {
 					<div
 						className="absolute inset-0 z-[-1] bg-cover bg-center blur-md opacity-40"
 						style={{
-							backgroundImage: "url('/src/assets/screen.png')",
+							backgroundImage: `url(${screenBg})`,
 						}}
 					/>
 
 					{/* Logo en haut à gauche */}
 					<div className="fixed top-10 left-14">
-						<img src="/src/assets/Logo_2.png" alt="Logo_2" />
+						<img src={logo2} alt="Logo_2" />
 					</div>
 
 					{/* Contenu centré */}
