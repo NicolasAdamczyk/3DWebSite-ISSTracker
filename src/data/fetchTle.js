@@ -1,4 +1,3 @@
-// utils/fetchTle.js
 export async function fetchISS_TLE() {
 	const res = await fetch('https://iss-tle.powertubeee.workers.dev/')
 	if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`)

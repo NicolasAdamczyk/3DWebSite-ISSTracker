@@ -1,41 +1,24 @@
 import React, { useEffect, useState } from "react";
+import { fetchISSCountry } from "../data/fetchCountry"; // Import de la fonction data
 
 const CurrentCountry = ({ lat, lon }) => {
 	const [countryName, setCountryName] = useState("Loading...");
 	const [countryCode, setCountryCode] = useState(null);
-
+	
 	useEffect(() => {
 		if (!lat || !lon) return;
-
-		const fetchCountry = async () => {
-			try {
-				const response = await fetch(
-					`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=5&addressdetails=1&accept-language=en`,
-					{
-						headers: {
-							"User-Agent": "ISSLiveApp/1.0 (ton-email@example.com)",
-						},
-					}
-				);
-
-				const data = await response.json();
-
-				if (data?.address?.country) {
-					setCountryName(data.address.country);
-					setCountryCode(data.address.country_code?.toUpperCase());
-				} else {
-					setCountryName("Ocean");
-					setCountryCode(null);
-				}
-			} catch (error) {
-				console.error("Error fetching country:", error);
-				setCountryName("Error");
-			}
+		
+		const getCountry = async () => {
+			// On appelle ton worker Cloudflare via l'utilitaire
+			const data = await fetchISSCountry(lat, lon);
+			
+			setCountryName(data.name);
+			setCountryCode(data.code);
 		};
-
-		fetchCountry();
+		
+		getCountry();
 	}, [lat, lon]);
-
+	
 	return (
 		<div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
 			<span>{countryName}</span>
