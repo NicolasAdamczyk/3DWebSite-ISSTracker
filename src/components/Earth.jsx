@@ -19,10 +19,10 @@ export default function Earth({ sunDirection, ...props }) {
         nightMap,
         cloudsMap,
     ] = useLoader(TextureLoader, [
-        'import.meta.env.BASE_URL + textures/earth/earthmap2k.jpg',
-        'import.meta.env.BASE_URL + textures/earth/earthnm2k.png',
-        'import.meta.env.BASE_URL + textures/earth/earthlights2k.jpg',
-        'import.meta.env.BASE_URL + textures/earth/earthhiresclouds4K.png',
+        import.meta.env.BASE_URL + 'textures/earth/earthmap2k.jpg',
+        import.meta.env.BASE_URL + 'textures/earth/earthnm2k.png',
+        import.meta.env.BASE_URL + 'textures/earth/earthlights2k.jpg',
+        import.meta.env.BASE_URL + 'textures/earth/earthhiresclouds4K.png',
     ])
 
     const nightMaterial = useMemo(() => createNightMaterial(colorMap, nightMap, sunDirection), [colorMap, nightMap, sunDirection]) // Create a night material with the provided textures

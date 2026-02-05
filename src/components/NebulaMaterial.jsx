@@ -27,7 +27,7 @@ function getSprites({
   hue = 0.65,
   numSprites = 8,
   opacity = 0.2,
-  path = "import.meta.env.BASE_URL + 'textures/others/rad-grad.png",
+  path = "/textures/others/rad-grad.png",
   radius = 10,
   sat = 0.5,
   size = 24,
